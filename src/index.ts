@@ -7,8 +7,16 @@ import cors from 'cors'
 const app = express()
 const port = 8000
 
+const whitelist = [
+  process.env.ALLOWED_ORIGIN
+]
+
+const corsOptions: any = {
+  origin: whitelist,
+  optionSuccessStatus: 200,
+}
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use('/books', booksRouter)
 
